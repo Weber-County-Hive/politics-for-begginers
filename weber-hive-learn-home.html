@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weber County Hive — Learn</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+:root{
+  --bg:#0A0A0A; --surface:#141414;
+  --gold:#D4AF37; --gold-muted:#B8956A; --line:#2E2E2E;
+  --text:#EDEDED; --text-2:#9A9A9A; --text-3:#6A6A6A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,serif;line-height:1.6;}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px;}
+header{border-bottom:4px solid var(--gold);padding:28px 0 22px;}
+.brand{display:flex;align-items:center;gap:14px;}
+.hex svg{width:40px;height:44px;}
+.brand-text .h1{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:var(--gold);letter-spacing:2px;}
+.brand-text .h2{font-size:12px;color:var(--gold-muted);letter-spacing:3px;}
+.hero{padding:56px 0 40px;}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,6vw,44px);color:var(--gold);}
+.hero p{margin-top:16px;color:var(--text-2);font-size:18px;max-width:560px;}
+.cats{padding:20px 0 60px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+.cat{
+  display:block;border:1px solid var(--line);border-left:4px solid var(--gold);
+  padding:24px 26px;text-decoration:none;color:inherit;border-radius:0 6px 6px 0;
+  transition:background .15s;
+}
+.cat:hover{background:var(--surface);}
+.cat .t{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:var(--gold);}
+.cat .d{color:var(--text-2);font-size:14px;margin-top:8px;}
+footer{border-top:4px solid var(--gold);padding:28px 0;color:var(--gold-muted);font-size:14px;letter-spacing:1px;}
+footer .sub{color:var(--text-3);font-size:13px;margin-top:6px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap brand">
+    <div class="hex">
+      <svg viewBox="0 0 60 68" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="30,0 60,17 60,51 30,68 0,51 0,17" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+        <text x="30" y="42" font-family="Georgia, serif" font-size="24" fill="#D4AF37" text-anchor="middle" font-weight="700">H</text>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <div class="h1">THE HIVE</div>
+      <div class="h2">WEBER COUNTY</div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Learn</h1>
+    <p>Tools and explainers to go with the reporting — organized by category.</p>
+  </div>
+</section>
+
+<section class="cats">
+  <div class="wrap" style="display:contents;">
+    <a href="weber-hive-beginners-index.html" class="cat">
+      <div class="t">Politics for Beginners</div>
+      <div class="d">Short, plain-language answers — no jargon first, no assumed background.</div>
+    </a>
+    <a href="weber-hive-campaign-finance-explainer.html" class="cat">
+      <div class="t">Interactive Explainers</div>
+      <div class="d">Go deeper — full interactive maps of how the systems connect.</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>INDEPENDENT &middot; ACCOUNTABILITY &middot; JOURNALISM</div>
+    <div class="sub">webercountyhive.substack.com</div>
+  </div>
+</footer>
+</body>
+</html>
