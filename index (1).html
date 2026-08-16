@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politics for Beginners | The Weber County Hive</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+:root{
+  --bg:#0A0A0A; --surface:#141414; --surface-2:#1B1B1B;
+  --gold:#D4AF37; --gold-muted:#B8956A; --line:#2E2E2E;
+  --text:#EDEDED; --text-2:#9A9A9A; --text-3:#6A6A6A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,serif;line-height:1.6;}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px;}
+header{border-bottom:4px solid var(--gold);padding:28px 0 22px;}
+.brand{display:flex;align-items:center;gap:14px;}
+.hex svg{width:40px;height:44px;}
+.brand-text .h1{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:var(--gold);letter-spacing:2px;}
+.brand-text .h2{font-size:12px;color:var(--gold-muted);letter-spacing:3px;}
+.hero{padding:56px 0 40px;border-bottom:1px solid var(--line);}
+.eyebrow{color:var(--gold);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(30px,6vw,44px);font-weight:700;color:var(--gold);line-height:1.2;}
+.hero p{margin-top:18px;font-size:18px;color:var(--text-2);max-width:600px;}
+.list{padding:40px 0;}
+.item{
+  display:block;
+  border:1px solid var(--line);
+  border-left:4px solid var(--line);
+  padding:22px 24px;
+  margin-bottom:14px;
+  text-decoration:none;
+  color:inherit;
+  transition:border-color .15s, background .15s;
+}
+.item.ready{cursor:pointer;}
+.item.ready:hover{border-left-color:var(--gold);background:var(--surface);}
+.item.soon{opacity:.5;}
+.item .num{font-size:12px;color:var(--gold-muted);letter-spacing:1px;margin-bottom:8px;}
+.item .q{font-family:'Playfair Display',Georgia,serif;font-size:19px;color:var(--text);line-height:1.35;}
+.item .meta{margin-top:8px;font-size:13px;color:var(--text-3);}
+footer{border-top:4px solid var(--gold);padding:28px 0;color:var(--gold-muted);font-size:14px;letter-spacing:1px;}
+footer .sub{color:var(--text-3);font-size:13px;margin-top:6px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap brand">
+    <div class="hex">
+      <svg viewBox="0 0 60 68" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="30,0 60,17 60,51 30,68 0,51 0,17" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+        <text x="30" y="42" font-family="Georgia, serif" font-size="24" fill="#D4AF37" text-anchor="middle" font-weight="700">H</text>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <div class="h1">THE HIVE</div>
+      <div class="h2">WEBER COUNTY</div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">A Series</div>
+    <h1>Politics for beginners</h1>
+    <p>Short, plain-language answers to real questions — no jargon first, no assumed background. Pick a topic below. Each one takes a few minutes.</p>
+  </div>
+</section>
+
+<section class="list">
+  <div class="wrap">
+
+    <a href="weber-hive-beginners-pac.html" class="item ready">
+      <div class="num">Topic 1</div>
+      <div class="q">What's a PAC, and why did a candidate suddenly have $20,000 they didn't have last week?</div>
+      <div class="meta">3 min read</div>
+    </a>
+
+    <div class="item soon">
+      <div class="num">Topic 2</div>
+      <div class="q">What's the difference between a PAC and a Super PAC?</div>
+      <div class="meta">Coming soon</div>
+    </div>
+
+    <div class="item soon">
+      <div class="num">Topic 3</div>
+      <div class="q">What does it actually mean when a bill gets "amended"?</div>
+      <div class="meta">Coming soon</div>
+    </div>
+
+    <div class="item soon">
+      <div class="num">Topic 4</div>
+      <div class="q">Who's a lobbyist, and what do they actually do all day?</div>
+      <div class="meta">Coming soon</div>
+    </div>
+
+    <div class="item soon">
+      <div class="num">Topic 5</div>
+      <div class="q">Why doesn't "disclosed" always mean "easy to find"?</div>
+      <div class="meta">Coming soon</div>
+    </div>
+
+    <div class="item soon">
+      <div class="num">Topic 6</div>
+      <div class="q">What's a conflict of interest, really — and who decides?</div>
+      <div class="meta">Coming soon</div>
+    </div>
+
+    <div class="item soon">
+      <div class="num">Topic 7</div>
+      <div class="q">How does a bill actually become law in Utah?</div>
+      <div class="meta">Coming soon</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>INDEPENDENT &middot; ACCOUNTABILITY &middot; JOURNALISM</div>
+    <div class="sub">webercountyhive.substack.com</div>
+  </div>
+</footer>
+</body>
+</html>
