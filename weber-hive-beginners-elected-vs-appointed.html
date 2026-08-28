@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elected vs. Appointed | Politics for Beginners | The Weber County Hive</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+:root{
+  --bg:#0A0A0A; --surface:#141414; --surface-2:#1B1B1B;
+  --gold:#D4AF37; --gold-muted:#B8956A; --line:#2E2E2E;
+  --text:#EDEDED; --text-2:#9A9A9A; --text-3:#6A6A6A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,serif;line-height:1.65;}
+.wrap{max-width:680px;margin:0 auto;padding:0 24px;}
+header{border-bottom:4px solid var(--gold);padding:24px 0 18px;}
+.brand{display:flex;align-items:center;gap:14px;}
+.hex svg{width:34px;height:38px;}
+.brand-text .h1{font-family:'Playfair Display',Georgia,serif;font-size:17px;color:var(--gold);letter-spacing:2px;}
+.brand-text .h2{font-size:11px;color:var(--gold-muted);letter-spacing:3px;}
+
+.back{
+  display:inline-block;margin:20px 0 0;color:var(--text-3);font-size:14px;text-decoration:none;
+}
+.back:hover{color:var(--gold-muted);}
+
+.eyebrow{color:var(--gold);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin:28px 0 16px;}
+h1{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(28px,5.5vw,38px);
+  color:var(--gold);
+  line-height:1.25;
+  margin-bottom:28px;
+}
+
+.tldr{
+  background:var(--surface);
+  border-left:4px solid var(--gold);
+  padding:20px 22px;
+  margin-bottom:36px;
+  border-radius:0 6px 6px 0;
+}
+.tldr .k{font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+.tldr p{font-size:17px;color:var(--text);}
+
+article p{font-size:17px;color:var(--text-2);margin-bottom:20px;max-width:600px;}
+article strong{color:var(--text);}
+
+.diagram{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  margin:36px 0;
+  flex-wrap:wrap;
+}
+.box{
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:16px 20px;text-align:center;min-width:120px;
+}
+.box .t{font-family:'Playfair Display',Georgia,serif;color:var(--gold);font-size:15px;}
+.box .s{font-size:12px;color:var(--text-3);margin-top:4px;}
+.diag-arrow{color:var(--gold-muted);font-size:22px;padding:0 12px;}
+
+.diagram-stack{margin:36px 0;display:flex;flex-direction:column;gap:18px;}
+.diagram-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
+.diagram-row .row-label{font-size:11px;letter-spacing:2px;color:var(--text-3);text-transform:uppercase;width:100%;text-align:center;margin-bottom:8px;}
+
+.terms{margin:36px 0;}
+.term{
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:18px 22px;margin-bottom:12px;
+}
+.term .w{font-family:'Playfair Display',Georgia,serif;color:var(--gold);font-size:16px;margin-bottom:6px;}
+.term .d{color:var(--text-2);font-size:15px;}
+
+.example{
+  background:var(--surface);border:1px solid var(--line);
+  padding:22px 24px;margin:36px 0;border-radius:6px;
+}
+.example .k{font-size:11px;letter-spacing:2px;color:var(--gold-muted);text-transform:uppercase;margin-bottom:10px;}
+.example p{color:var(--text-2);font-size:16px;margin-bottom:12px;}
+.example a{color:var(--gold);text-decoration:none;font-size:15px;}
+.example a:hover{text-decoration:underline;}
+
+.deeper{
+  border-top:1px solid var(--line);
+  margin-top:48px;padding-top:28px;
+}
+.deeper p{color:var(--text-2);font-size:15px;}
+.deeper a{color:var(--gold);text-decoration:none;}
+.deeper a:hover{text-decoration:underline;}
+
+.next{
+  margin-top:36px;padding:20px 22px;
+  border:1px solid var(--line);border-radius:6px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+}
+.next .label{font-size:12px;letter-spacing:2px;color:var(--text-3);text-transform:uppercase;}
+.next .q{font-family:'Playfair Display',Georgia,serif;color:var(--text-2);font-size:15px;margin-top:4px;}
+
+footer{border-top:4px solid var(--gold);padding:28px 0;margin-top:56px;color:var(--gold-muted);font-size:14px;letter-spacing:1px;}
+footer .sub{color:var(--text-3);font-size:13px;margin-top:6px;}
+
+@media (max-width:520px){
+  .diag-arrow{transform:rotate(90deg);}
+  .diagram{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap brand">
+    <div class="hex">
+      <svg viewBox="0 0 60 68" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="30,0 60,17 60,51 30,68 0,51 0,17" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+        <text x="30" y="42" font-family="Georgia, serif" font-size="24" fill="#D4AF37" text-anchor="middle" font-weight="700">H</text>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <div class="h1">THE HIVE</div>
+      <div class="h2">WEBER COUNTY</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <a href="index.html" class="back">&larr; Politics for Beginners</a>
+  <div class="eyebrow">Topic 8</div>
+  <h1>What's the difference between an elected official and an appointed one?</h1>
+
+  <div class="tldr">
+    <div class="k">Short answer</div>
+    <p>An <strong>elected</strong> official wins a public vote and answers to voters at the next election. An <strong>appointed</strong> official is selected — usually by someone who was elected, like a governor — with no public vote at all. Both can hold real government power. Only one of them can be voted out.</p>
+  </div>
+
+  <article>
+    <p>When most people think "government official," they picture someone who ran a campaign and won an election — a mayor, a state senator, a governor. That's <strong>elected</strong> office: your name goes on a ballot, voters choose, and if enough of them are unhappy with you later, they can vote you out.</p>
+
+    <p><strong>Appointed</strong> office works differently. Instead of a public vote, one person or a small group — often a governor, sometimes a board or commission — simply selects who fills the role. No ballot, no campaign, no direct public say in who gets picked.</p>
+
+    <div class="diagram-stack">
+      <div class="diagram-row">
+        <div class="row-label">Elected</div>
+        <div class="box"><div class="t">Voters</div><div class="s">the public</div></div>
+        <div class="diag-arrow">&#8594;</div>
+        <div class="box"><div class="t">Election</div><div class="s">a public vote</div></div>
+        <div class="diag-arrow">&#8594;</div>
+        <div class="box"><div class="t">Official</div><div class="s">answers to voters</div></div>
+      </div>
+      <div class="diagram-row">
+        <div class="row-label">Appointed</div>
+        <div class="box"><div class="t">Governor</div><div class="s">or a board</div></div>
+        <div class="diag-arrow">&#8594;</div>
+        <div class="box"><div class="t">Appointment</div><div class="s">no public vote</div></div>
+        <div class="diag-arrow">&#8594;</div>
+        <div class="box"><div class="t">Official</div><div class="s">answers to whoever appointed them</div></div>
+      </div>
+    </div>
+
+    <p>Neither path is illegal or unusual — governors appoint advisors, board members, and agency heads all the time, and it's a normal part of how government runs. But the two paths carry a real difference in accountability: if you don't like what an elected official does, you get a chance to vote them out. If you don't like what an appointed official does, there's usually no ballot where you can do anything about it directly.</p>
+
+    <p>It's also common for one person to hold both kinds of office over a career — win election to one seat, then later get appointed to a different, unelected role. The power can look similar from the outside. Where it comes from, and who it answers to, is not the same.</p>
+  </article>
+
+  <div class="terms">
+    <div class="term"><div class="w">Confirmation</div><div class="d">Some appointments need a follow-up vote by a legislature or council before they're official — a partial check, but still not a public vote.</div></div>
+    <div class="term"><div class="w">Board or commission seat</div><div class="d">A common type of appointed role — a governor or agency names someone to sit on a body that oversees a specific area, like housing or transportation.</div></div>
+    <div class="term"><div class="w">Senior advisor</div><div class="d">A title for a direct appointee to an elected official's office, without formal board oversight — how much authority it carries depends entirely on who appointed them and what they're asked to do.</div></div>
+  </div>
+
+  <div class="example">
+    <div class="k">A real Utah example</div>
+    <p>Steve Waldrip served two elected terms in the Utah House. In December 2023, Gov. Spencer Cox appointed him Senior Advisor for Housing Strategy — no vote required. A 2026 law then made him state housing coordinator, in charge of an entire new state division. In August 2026, that unelected authority is what he used to tell a city council a county's funding was "at risk."</p>
+    <a href="https://weber-county-hive.github.io/Unelected-Power/steve-waldrip.html">Read the full profile &rarr;</a>
+  </div>
+
+  <div class="deeper">
+    <p>Want to see more people who hold power in Utah without ever being on a ballot for that specific role? <a href="https://weber-county-hive.github.io/Unelected-Power/">Explore the Unelected Power series &rarr;</a></p>
+  </div>
+
+  <div class="next">
+    <div>
+      <div class="label">Next up</div>
+      <div class="q">What's a conflict of interest, really — and who decides?</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>INDEPENDENT &middot; ACCOUNTABILITY &middot; JOURNALISM</div>
+    <div class="sub">webercountyhive.substack.com</div>
+  </div>
+</footer>
+</body>
+</html>
