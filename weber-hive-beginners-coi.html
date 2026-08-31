@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Box Was Empty. Here's How We Still Know. | The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<style>
+  :root{
+    --paper:#F3ECE0; --paper-dim:#E9E0D0; --void:#181210;
+    --maroon:#6E1F2B; --maroon-dim:#8C3B44;
+    --ink:#211714; --ink-soft:#4A3B35; --line:#C9BBA4; --gold:#B4863C;
+    --max:760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',sans-serif;font-size:17px;line-height:1.62;}
+  a{color:var(--maroon);}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;color:var(--ink);margin:0;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+
+  .topbar{background:var(--void);color:var(--paper-dim);padding:12px 24px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .topbar a{color:var(--paper-dim);text-decoration:none;opacity:.85;}
+
+  header.masthead{padding:56px 24px 36px;border-bottom:3px solid var(--void);}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:28px;height:2px;background:var(--maroon);display:inline-block;}
+  h1.title{font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-0.01em;}
+  .dek{font-size:19px;color:var(--ink-soft);margin-top:18px;max-width:640px;}
+
+  .plain{background:#fff;border:2px solid var(--maroon);margin:0;}
+  .plain-head{background:var(--maroon);color:#fff;padding:12px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;}
+  .plain-body{padding:26px 26px 28px;}
+  .plain-body p{font-size:17px;margin:0 0 16px;}
+  .plain-body p:last-child{margin-bottom:0;}
+  .plain-body strong{color:var(--maroon);}
+
+  section.section{padding:44px 24px 8px;max-width:var(--max);margin:0 auto;}
+  section.section h2{font-size:clamp(23px,3.4vw,29px);line-height:1.15;margin-bottom:16px;}
+  section.section p{margin:0 0 17px;}
+  section.section p.lead{font-size:18px;color:var(--ink-soft);}
+
+  .void-panel{background:var(--void);color:var(--paper);border-radius:2px;padding:28px 26px;margin:26px 0;}
+  .void-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .void-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(18px,2.4vw,22px);line-height:1.45;color:#fff;}
+  .void-quote .cite{display:block;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:12.5px;color:var(--gold);margin-top:12px;}
+
+  .statute-box{background:var(--paper-dim);border:1px solid var(--line);padding:18px 22px;margin:20px 0;font-size:14.5px;color:var(--ink-soft);}
+  .statute-box strong{color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;}
+
+  .case-divider{display:flex;align-items:center;gap:16px;margin:52px 0 0;max-width:var(--max);margin-left:auto;margin-right:auto;padding:0 24px;}
+  .case-divider .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--maroon);white-space:nowrap;background:var(--paper-dim);border:1px solid var(--maroon);padding:4px 12px;border-radius:20px;}
+  .case-divider .rule{flex:1;height:1px;background:var(--line);}
+
+  .case-card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--maroon);padding:24px 26px;margin:22px 0;}
+  .case-card h3{font-size:22px;margin-bottom:4px;}
+  .case-card .role{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);margin-bottom:16px;}
+  .form-row{display:grid;grid-template-columns:150px 1fr;gap:4px 14px;margin:16px 0;font-size:14.5px;}
+  .form-row .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--maroon);}
+  .form-row .v{color:var(--ink);}
+  .indep-list{margin:16px 0 4px;padding-left:0;list-style:none;}
+  .indep-list li{position:relative;padding-left:22px;margin-bottom:10px;font-size:15px;color:var(--ink);}
+  .indep-list li::before{content:"—";position:absolute;left:0;color:var(--maroon);}
+
+  .gap-callout{background:var(--paper-dim);border-left:3px solid var(--gold);padding:14px 18px;margin:18px 0 0;font-size:14.5px;color:var(--ink-soft);}
+  .gap-callout strong{color:var(--ink);}
+
+  .connect-panel{background:var(--void);border-radius:2px;padding:22px 22px 8px;margin:22px 0 0;}
+  .connect-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .connect-panel .mermaid{background:#fff;border-radius:2px;padding:14px 10px 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .connect-panel .mermaid svg{max-width:none !important;height:auto !important;}
+  .connect-panel::after{content:"← scroll to see the full diagram →";display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--gold);text-align:center;margin-top:8px;opacity:.75;}
+
+  .rationale-box{background:#fff;border:1px solid var(--line);border-top:4px solid var(--maroon);padding:20px 22px;margin:22px 0 0;}
+  .rationale-box h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--maroon);margin:0 0 8px;}
+  .rationale-box h4:not(:first-child){margin-top:16px;}
+  .rationale-box p{font-size:14.5px;color:var(--ink);margin:0;}
+  .verdict-tag{display:inline-block;margin-top:16px;padding:6px 14px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:.03em;}
+  .verdict-tag.mild{background:#F0E5D1;color:#966423;}
+  .verdict-tag.moderate{background:#F3E1DD;color:#A84439;}
+  .verdict-tag.severe{background:#F3E1DD;color:#8C2F2F;}
+  .verdict-tag.pending{background:var(--paper-dim);color:var(--ink-soft);border:1px dashed var(--line);}
+
+  .unk{color:var(--gold);font-weight:700;}
+  .unk-note{background:var(--paper-dim);border-left:3px solid var(--gold);padding:12px 16px;margin:10px 0 0;font-size:13.5px;color:var(--ink-soft);}
+  .unk-note strong{color:var(--ink);}
+  .unk-legend{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);background:var(--paper-dim);border:1px solid var(--line);padding:8px 14px;border-radius:20px;margin-top:14px;}
+
+  .flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin:24px 0 0;}
+  .flipcard{perspective:1200px;height:220px;}
+  .flip-toggle{position:absolute;opacity:0;pointer-events:none;}
+  .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;cursor:pointer;display:block;}
+  .flip-toggle:checked ~ .flip-inner{transform:rotateY(180deg);}
+  .flip-toggle:focus-visible ~ .flip-inner{outline:2px solid var(--maroon);outline-offset:2px;}
+  .flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:2px;padding:22px 24px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto;}
+  .flip-front{background:#fff;border:2px solid var(--maroon);}
+  .flip-front .fc-term{font-family:'Fraunces',serif;font-weight:600;font-size:19px;color:var(--maroon);line-height:1.3;}
+  .flip-front .fc-sub{margin-top:8px;font-size:13px;color:var(--ink-soft);}
+  .flip-front .fc-tap{margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.65;}
+  .flip-back{background:var(--void);color:var(--paper);transform:rotateY(180deg);font-size:14px;line-height:1.55;justify-content:flex-start;}
+  .flip-back strong{color:var(--gold);}
+
+  .full-sources{border:1px solid var(--line);background:#fff;margin:30px 0 0;}
+  .full-sources summary{cursor:pointer;list-style:none;padding:16px 22px;background:var(--paper-dim);font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--maroon);}
+  .full-sources summary::-webkit-details-marker{display:none;}
+  .full-sources-body{padding:20px 24px 26px;}
+  .full-sources-body h4{font-family:'Fraunces',serif;font-weight:600;font-size:14.5px;color:var(--ink);margin:20px 0 6px;padding-top:14px;border-top:1px solid var(--line);}
+  .full-sources-body h4:first-child{margin-top:0;padding-top:0;border-top:none;}
+  .full-sources-body p{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);line-height:1.7;margin:0;}
+
+  footer.site-footer{margin-top:56px;background:var(--void);color:var(--paper-dim);padding:36px 24px 46px;}
+  footer.site-footer .wrap{display:flex;flex-direction:column;gap:12px;}
+  footer.site-footer h3{color:#fff;font-size:19px;}
+  footer.site-footer p{color:#B8A899;font-size:14px;max-width:520px;line-height:1.6;margin:0;}
+  footer.site-footer a{color:var(--gold);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+
+  @media(max-width:600px){
+    .form-row{grid-template-columns:1fr;}
+    header.masthead{padding:44px 18px 30px;}
+    section.section{padding:36px 18px 8px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span><a href="https://webercountyhive.substack.com/" target="_blank" rel="noopener">The Weber County Hive</a> · Politics for Beginners</span>
+  <a href="index.html">← All topics</a>
+</div>
+
+<header class="masthead">
+  <div class="eyebrow">Politics for Beginners · How Disclosure Actually Works</div>
+  <h1 class="title">The Box Was Empty. Here's How We Still Know That Matters.</h1>
+  <p class="dek">Eight Utah officials and candidates, several different offices, one identical box checked: "no conflict of interest to report" — or a form completed with only a fraction of what the public record shows. Here's how independent records surface what a blank form can't hide — and how you can check this yourself, for anyone, anywhere in Utah.</p>
+</header>
+
+<div class="plain">
+  <div class="plain-head">New to this? Start here.</div>
+  <div class="plain-body">
+    <p>Every elected official in Utah has to fill out a <strong>conflict of interest disclosure form</strong> — a document listing their jobs, businesses, and board seats, so the public can see where their private interests might overlap with their public decisions.</p>
+    <p>Here's the catch: <strong>the official fills out their own form.</strong> There's no one standing over their shoulder checking it against reality before it's filed. So when a line is left blank, the form itself can't tell you whether that's because there was genuinely nothing to report — or because something was left out.</p>
+    <p>That's not a flaw unique to any one person. It's just how disclosure works everywhere. Which means <strong>an empty box is never, on its own, proof of anything.</strong> What actually matters is whether something outside that box — a state business registry, a nonprofit's own website, a corporate filing — tells a different story than the form does.</p>
+    <p>That gap is what this piece is about, using eight real, documented Utah examples.</p>
+    <span class="unk-legend"><span class="unk">*</span> marks a claim we genuinely don't know the answer to yet — flagged honestly instead of glossed over</span>
+  </div>
+</div>
+
+<div class="plain" style="margin:28px 24px 0;">
+  <div class="plain-head">New to this? Two forms get mixed up constantly.</div>
+  <div class="plain-body">
+    <p>Every case on this page mentions a "conflict of interest disclosure." A few also mention a "campaign finance report." These are not the same document, don't ask the same questions, and don't get filed on the same schedule. Tap each card below.</p>
+    <div class="flip-grid">
+
+      <div class="flipcard">
+        <input type="checkbox" id="fc-coi" class="flip-toggle">
+        <label for="fc-coi" class="flip-inner">
+          <div class="flip-front">
+            <div class="fc-term">Conflict of Interest (COI) Disclosure</div>
+            <div class="fc-sub">The form every case on this page is actually about</div>
+            <div class="fc-tap">Tap to flip</div>
+          </div>
+          <div class="flip-back">Lists an official's <strong>outside interests</strong> — employers, businesses they own, board seats, family members' jobs. Filed once, typically at candidacy or annually while in office. It exists to answer one question: could something in this person's life bias a decision they're about to make? It says nothing about who paid for their campaign.</div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="fc-fin" class="flip-toggle">
+        <label for="fc-fin" class="flip-inner">
+          <div class="flip-front">
+            <div class="fc-term">Campaign Finance Disclosure</div>
+            <div class="fc-sub">A different form, a different purpose</div>
+            <div class="fc-tap">Tap to flip</div>
+          </div>
+          <div class="flip-back">Lists <strong>who donated to a campaign</strong> and how that money was spent — itemized contributions, dates, amounts, expenditures. Filed repeatedly throughout an election cycle, not once. It exists to answer a different question: who's funding this candidate? It says nothing about the candidate's own outside business interests or family relationships.</div>
+        </label>
+      </div>
+
+    </div>
+    <p style="margin-top:18px;font-size:14.5px;color:var(--ink-soft);">A candidate can file a spotless campaign finance report while leaving their COI form nearly blank, or the reverse — they're graded separately, filed separately, and a gap in one doesn't fill the gap in the other. Several cases below have both: a clean-looking donor list sitting next to an incomplete conflict-of-interest form.</p>
+  </div>
+</div>
+
+<section class="section" style="padding-top:36px;">
+  <h2>Where these laws actually live</h2>
+  <p class="lead">Everything on this page traces back to one of a small handful of Utah statutes. Here's how they connect.</p>
+  <div class="connect-panel" style="background:var(--void);">
+    <div class="connect-label">Utah's disclosure law, mapped</div>
+    <pre class="mermaid">
+flowchart TD
+  CONTENT["§20A-11-1604(6)<br/>what must be disclosed:<br/>employers, businesses,<br/>spouse, household adults"]
+  CONTENT -->|borrowed by all four<br/>tracks below| STATE["State legislators, state<br/>constitutional officers,<br/>USBE members<br/>Title 20A-11 Part 16<br/>filed with Lt. Governor<br/>Case 8"]
+  CONTENT --> COUNTY["County elected officers<br/>§17-70-509<br/>filed with county clerk<br/>Cases 5, 6, 7"]
+  CONTENT --> MUNI["Municipal elected officers<br/>§10-3-1313<br/>filed with city recorder<br/>Case 5"]
+  CONTENT --> SPO["Special public officers<br/>on appointed boards<br/>§67-16-16<br/>filed to the BOARD'S<br/>OWN clerk<br/>Cases 1, 3, 4"]
+  SPO -->|self-policing —<br/>same body reports<br/>its own violations| SELF["MIDA / PID / WOLB<br/>boards"]
+  CONTENT -->|candidates file at<br/>declaration of candidacy| CAND["§20A-11-1603<br/>an incumbent may skip a<br/>new filing if their annual<br/>one is already current —<br/>(1)(c) exception"]
+  CONTENT -->|7-day deadline to<br/>amend after a change| CLOCK["class B misdemeanor<br/>+ $100 fine + AG referral<br/>— same penalty, all four tracks"]
+  CONTENT -->|redaction option| REDACT["§20A-11-1604(7)(a)<br/>'at-risk employee' checkbox<br/>Case 3"]
+  MIDA63H["Title 63H, §63H-1-304<br/>MIDA layers extra<br/>posting rules on top"] -.-> SPO
+  SEP1["Campaign finance reports<br/>Cases 6, 7, 8"] -.->|different part of<br/>Title 20A-11,<br/>NOT the same form| CONTENT
+  SEP2["Lobbyist registration<br/>Title 36-11<br/>Cases 6, 7"] -.->|separate title entirely| CONTENT
+    </pre>
+  </div>
+  <p style="margin-top:18px;">§20A-11-1604(6) is the common ancestor — it defines what "disclose your interests" actually means, and every other track borrows that same content requirement wholesale rather than writing its own. But which statute actually governs a given form depends on the office: state officials file straight through the Lt. Governor; county officers file under a different section to the county clerk; city officers file under yet another section to the city recorder; and appointed board members — MIDA, PIDs, the Wasatch Open Lands Board — file under Title 67-16, to their own board's clerk. That last one is the self-policing structure this page keeps running into: the body responsible for catching a violation is the body the violator sits on. Campaign finance and lobbyist registration are dotted lines on purpose — different law, different schedule, and a clean one doesn't offset a gap in the other.</p>
+</section>
+
+<section class="section">
+  <h2>How the system is supposed to work</h2>
+  <p class="lead">Utah law doesn't leave disclosure to good intentions alone — it's a statutory requirement, with a real penalty attached.</p>
+  <p>Under Utah Code, officials who qualify as "special public officers" — a category that includes board members of authorities like MIDA, along with many county and municipal officeholders — must file a written conflict-of-interest disclosure once a year, typically by January 31. The statute spells out what happens if they don't:</p>
+
+  <div class="statute-box">
+    <strong>Utah Code §63H-1-304(5)–(6) — this is MIDA's own law</strong><br>
+    Title 63H is the statute that created and governs the Military Installation Development Authority specifically. Subsections (5)–(6) apply to MIDA board members — the rule that governs Case 1 (Erik Rowland). A board member who fails to file is guilty of a class B misdemeanor. The administrator or clerk of MIDA's own board is required to report the violation and impose a $100 civil fine — the same body the violating member sits on is responsible for catching and reporting the failure.
+  </div>
+
+  <p>The other cases on this page file under different statutes entirely — county candidates and officeholders generally fall under Utah Code Title 67-16 (the Public Officers' and Employees' Ethics Act) or the candidate-disclosure rules in Title 20A-11; USBE members follow the Board's own disclosure requirements. Each has its own version of the same basic ask — list your outside interests — but the specific law, deadline, and enforcement path differs by office. §63H-1-304 is a useful, clearly worded example of how the enforcement side is supposed to work, not the law behind every case here.</p>
+
+  <p>The forms themselves generally ask the same handful of questions: current and past employers, any business where you're an officer or owner, board seats — paid or unpaid — and the same information for a spouse. It's a short form. It isn't a hard one to fill out completely.</p>
+
+  <div class="void-panel">
+    <div class="void-label">Former Utah State Auditor John Dougall, June 2026</div>
+    <div class="void-quote">"Disclose more, not less, and do it publicly... The best practices I saw were when elected officials were just really upfront — 'here's what I do, here's why I have potential conflicts in this arena.' That's when their constituents say, 'OK, they're being upfront, they're disclosing it, they're not hiding anything.'"
+      <span class="cite">— Lehi Free Press / American Fork Citizen, June 4, 2026</span>
+    </div>
+  </div>
+
+  <p>Dougall, who spent twelve years as state auditor after chairing the Utah House Ethics Committee, put the actual risk plainly: problems rarely come from proven wrongdoing. They come from the appearance of it — from officials who look like they're favoring their own interests without having said so out loud. Disclosure isn't a formality. It's the thing that lets the public tell the difference.</p>
+</section>
+
+<div class="case-divider"><span class="tag">Case 1</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Erik Rowland</h3>
+    <div class="role">Wasatch County Council Chair · MIDA board member · running unopposed for Seat C, 2026</div>
+    <p>MIDA's own disclosure form asks board members to list every board, business, or paid role they hold — spelled out specifically, including for a spouse.</p>
+    <div class="form-row"><div class="k">He checked</div><div class="v">"I have no conflict of interest to report"</div></div>
+    <div class="form-row"><div class="k">He listed</div><div class="v">Nothing — all three numbered disclosure lines left blank, spouse not named</div></div>
+    <div class="form-row"><div class="k">Employer field</div><div class="v">Not distinguished as a separate line on this form — it's structured around board/business disclosure, not a standalone employer question. Not counted as a separate gap here.</div></div>
+    <p style="margin-top:18px;font-size:14px;"><strong>What independent public records show, none of it from his own form:</strong></p>
+    <ul class="indep-list">
+      <li>A named board member of CAMS, a Heber City nonprofit holding a paid, multi-year contract with the same city government he helps oversee</li>
+      <li>Owner or manager of at least four active companies, per Utah's own business registry</li>
+      <li>Two of those companies share a physical address and an overlapping ownership group</li>
+      <li>Sits on MIDA's board alongside Gage Froerer (Case 3) — both used the same generic county form instead of MIDA's own required disclosure form for that seat, while the rest of MIDA's board filed the correct one</li>
+    </ul>
+    <div class="gap-callout"><strong>The gap:</strong> a state business registry doesn't ask an official's permission before listing them, and a nonprofit's own "meet the board" page doesn't check with him before naming him. Neither record depends on what he chose to write down.</div>
+    <div class="unk-note"><span class="unk">*</span> <strong>What we don't know:</strong> Rowland's County Council seat is a separate office from his MIDA seat, governed by its own statute (§17-70-509, filed to the county clerk) rather than MIDA's board-clerk process. We haven't checked whether he's filed a distinct county-officeholder disclosure apart from the MIDA one shown here — this page only covers the MIDA filing.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How he connects</div>
+      <pre class="mermaid">
+flowchart LR
+  R[Erik Rowland]
+  R -->|board seat| CAMS[CAMS<br/>Heber City nonprofit]
+  CAMS -->|paid contract| HC[Heber City government]
+  R -->|owner/manager| E1[SignalRx LLC<br/>fka JASE Pharmacies]
+  R -->|sole owner| E2[Rowland Development LLC]
+  R -->|manager, w/ Baird family| E3[Triumph Assurance<br/>Group LLC]
+  R -->|MIDA board seat| MIDA[MIDA]
+  GF[Gage Froerer<br/>Case 3] -->|also MIDA board,<br/>same wrong form| MIDA
+  R -->|Council Chair| WC[Wasatch County Council]
+      </pre>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>MIDA's disclosure form directly asks board members to list every board seat and business ownership. That's the whole point of the form — letting the public see, in advance, where a board member's other interests sit.</p>
+      <h4>What conflict it could represent</h4>
+      <p>None of these businesses have an obvious connection to a specific MIDA or Wasatch County vote. The risk isn't a proven instance of self-dealing — it's that the public has no way to check, because the form built specifically to let them check was left blank.</p>
+      <h4>Has anyone checked?</h4>
+      <p>No. The one state auditor complaint that touched this same CAMS board named a different member (Matt Brower), not Rowland. Nobody has ever formally reviewed his gaps — not even an old one. Case 3 below at least had a review, back in 2022, even if it didn't cover what's been added since.</p>
+      <span class="verdict-tag moderate">Moderate harm — undermines the public's ability to verify; no specific vote implicated yet, and never formally reviewed</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider"><span class="tag">Case 2</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Rachel Kahler</h3>
+    <div class="role">CAMS Executive Director · running for Wasatch County Council Seat A, 2026</div>
+    <p>Her candidacy paperwork included the same style of form — built specifically to capture other boards and business interests.</p>
+    <div class="form-row"><div class="k">She checked</div><div class="v">"I have no conflict of interest to report"</div></div>
+    <div class="form-row"><div class="k">She listed</div><div class="v">Nothing — all disclosure lines blank</div></div>
+    <div class="form-row"><div class="k">Employer field</div><div class="v">Same form as Rowland's — no separate employer line to check. Not counted as a distinct gap.</div></div>
+    <p style="margin-top:18px;font-size:14px;"><strong>What independent public records show:</strong></p>
+    <ul class="indep-list">
+      <li>CAMS's own paid Executive Director — a documented $39,900-a-year contract from Heber City, the government she's now running to help oversee</li>
+      <li>A director of Red White and Blue Festival Inc., a nonprofit not named anywhere on her form</li>
+      <li>Sole owner of 5 In The Hive, LLC — a company whose own state filing describes its purpose as acquiring and managing real estate investments, formed about two years before she filed for a council seat that votes on zoning and land use</li>
+    </ul>
+    <div class="gap-callout"><strong>Worth noting:</strong> Kahler has filed complete disclosures before — including for her original 2019 city council run. This isn't a case of someone who's never known how; it's a break from her own earlier pattern.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How she connects</div>
+      <pre class="mermaid">
+flowchart LR
+  K[Rachel Kahler]
+  K -->|paid Exec. Director| CAMS[CAMS<br/>Heber City nonprofit]
+  CAMS -->|paid contract| HC[Heber City government]
+  K -->|director| RWB[Red White and Blue<br/>Festival Inc.]
+  K -->|sole owner| E4[5 In The Hive LLC<br/>real estate investment]
+  RWB -->|also director| MB[Matt Brower<br/>Heber City Manager]
+  RWB -->|also director| DK[Dallin Koecher]
+  MB -->|also CAMS board| CAMS
+  DK -->|also CAMS board| CAMS
+      </pre>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>The form asks specifically for boards, businesses, and paid roles because a county council seat votes on the exact kinds of decisions — zoning, land use, budgets — that those interests could benefit from.</p>
+      <h4>What conflict it could represent</h4>
+      <p>5 In The Hive LLC is a real estate investment vehicle, formed about two years before she filed to run for a seat that votes on land use. That's not a stretch — it's the specific scenario a land-use disclosure form exists to catch, whether or not it's ever been acted on.</p>
+      <span class="verdict-tag severe">More direct harm — an investment vehicle sits close to the exact decisions the seat controls</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider"><span class="tag">Case 3</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Gage Froerer</h3>
+    <div class="role">Weber County Commissioner · in office since 2019, previously Utah House 2007–2019</div>
+    <p>Froerer's pattern looks different from the other two — not a single blank form, but a documented pattern across years of filings. He also sits on MIDA's board alongside Erik Rowland (Case 1) — both used the same generic county form instead of MIDA's own required disclosure form for that seat. And the developers at the center of his Nordic Village PID vote, John Lewis and Shane Dunleavy, are represented by the same lobbyist as Case 6 below: Kerry Gibson.</p>
+    <p style="margin-top:14px;">His 2025 county disclosure listed Nordic Valley Land Associates, LLC — a company tied to a large Ogden Valley development. His 2026 disclosure, filed one year later, does not list it. In between, Nordic Valley Land Associates was formally dissolved — just five to eight days after his 2026 form was filed.</p>
+    <p>The same pattern repeats with a second entity: Highlander NP Housing Corporation, listed as a directorship on his earliest House disclosures, is absent from both his 2025 and 2026 county filings — despite remaining a legally active entity through most of the period his 2025 filing covered. It was voluntarily dissolved in February 2025.</p>
+    <p style="margin-top:18px;font-size:14px;"><strong>Separately — and never appearing on any disclosure form reviewed at all:</strong></p>
+    <ul class="indep-list">
+      <li>G &amp; E 2 Properties, LLC — an active two-person real estate entity where he's a named member with signing authority</li>
+      <li>Froerer Appraisal and Investment Company, where he's listed as Vice President</li>
+      <li>C.K.R. Construction, LLC, where he's a listed officer and owner</li>
+    </ul>
+    <div class="def-inline"><strong>Employer field — why redact it this year?</strong> He's a sitting elected official; the public has a standing interest in knowing where he works. He listed his employer plainly in 2014, 2016, and 2025 — by name, every time. His 2026 form is the first time he's ever invoked the "at-risk government employee" redaction for that field. It's also the same form that drops Nordic Valley Land Associates. The redaction is legally permitted — but after twelve years of freely disclosing the same information, its first appearance lining up with the one entity he also newly dropped is a fair question to ask, not something to wave off as routine.</div>
+    <div class="gap-callout"><strong>The gap here is different in kind:</strong> not a blanket "no conflicts" answer, but entities that appear on a disclosure form right up until they're formally dissolved — and others that appear to never have been listed at all, even while active. Both patterns are documented from Utah's own corporate registry, not from his own paperwork.</div>
+    <div class="def-inline"><strong>What the entity says it does, versus what its owner does:</strong> Wolf Creek Management's 2014 founding document states its purpose as "general management and payroll services to local business." John Lewis's own bios — on his other company's site and on Wolf Creek Resort's own "About Us" page — describe him as a 28-to-32-year real estate developer and general contractor (Lewis Homes Inc.), "a key player in 80% of Ogden Valley's development," and an eight-year former chair of the Ogden Valley Planning Commission. Nothing in his own public description matches payroll or general management services. What Kerry Gibson actually lobbies the state on for this client isn't yet established.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How he connects — the wider Nordic Village network</div>
+      <pre class="mermaid">
+flowchart TD
+  F[Gage Froerer<br/>Weber County Commissioner]
+  F -->|MIDA board,<br/>same wrong form| MIDA[MIDA]
+  ER[Erik Rowland<br/>Case 1] -->|also MIDA board| MIDA
+  F -->|managed via J&amp;G| NVLA[Nordic Valley Land<br/>Associates LLC]
+  NVLA -->|transferred, $0| NVV[Nordic Village<br/>Venture LLC]
+  NVV -->|45%| CC[Clyde Capital Group]
+  NVV -->|5%| JL[John Lewis]
+  NVV -->|50%, via Skyline<br/>Mountain Base| LJ[Laurent Jouffray<br/>PID trustee]
+  F -->|voted to create,<br/>no COI filed| PID[Nordic Village PID<br/>and CRA]
+  F -->|2026 form only,<br/>after 12 yrs listing it| REDACT[Employer field<br/>redacted for first time]
+  REDACT -.->|same form| NVLA
+  LW[Laura Warburton<br/>Planning Commissioner]
+  LW -->|manages| KTV[Keep the Valley PAC]
+  JL -->|funds, with Dunleavy| KTV
+  SD[Shane Dunleavy] -->|funds, with Lewis| KTV
+  JL -->|lobbyist| KGL[Kerry Gibson<br/>Case 6]
+  SD -->|lobbyist| KGL
+  KGL -.->|also donate to<br/>other PACs, per Shauna,<br/>not yet independently sourced| OP[other PAC activity]
+  LW -->|voted to approve,<br/>no disclosure| EC["Eden Crossing<br/>John Lewis's project"]
+  F -->|political relationship<br/>since 2018| LW
+  F -->|County Commission<br/>approved same project| EC
+  SB[Sharon Bolos<br/>County Commission Chair]
+  SB -->|signed PID trustee<br/>appointment| PID
+  SB -->|brother, undisclosed| BA[Bryan Arrington<br/>VP, Nilson Homes]
+  UFP[Utah Forward PAC] -->|gave $2,500| SB
+  UFP -->|gave $5,000 in 2022<br/>+ $5,000 in 2023| F
+      </pre>
+      <p style="font-size:12px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;margin:10px 2px 0;"><span class="unk">*</span> The one dotted line marks a claim not yet independently sourced — that Lewis and Dunleavy also donate to other PACs beyond Keep the Valley. Their lobbyist connection to Kerry Gibson is confirmed, via his own client list.</p>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>His filings ask for exactly this: any entity where he's an officer, manager, or owner, at the time he holds it. The form isn't asking him to guess at relevance — it's asking for a complete list, so the public (not him) can judge what matters.</p>
+      <h4>What conflict it could represent</h4>
+      <p>This isn't an unrelated business sitting quietly undisclosed. He voted to create and fund the same public financing structure — the PID and tax-increment diversion — that benefited an entity he had a documented ownership stake in, on a timeline where that stake dissolved around the same votes. That's a direct financial interest in the specific decision, not a background conflict.</p>
+      <h4>Has anyone checked?</h4>
+      <p>Once — but not recently. County attorneys and the State Auditor's office reviewed his Nordic Valley interest in 2022, after a resident's complaint, and found compliance with no sanction. That review covered the original ownership question. It happened before the 2025 filing, before the 2026 filing that drops NVLA five to eight days ahead of its dissolution, and before the first-ever employer-field redaction on that same 2026 form. Nothing since 2022 has been formally reviewed by anyone.</p>
+      <span class="verdict-tag severe">Severe — a documented financial interest in the exact matter voted on; the one formal review is years old and doesn't cover the current pattern</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider"><span class="tag">Case 4</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Dallin Koecher</h3>
+    <div class="role">Wasatch Open Lands Board member · also on the CAMS/Ogden Valley nonprofit cluster</div>
+    <p>His annual Wasatch Open Lands Board disclosure form asks, plainly: what boards, director seats, or agent roles do you hold at entities regulated by Wasatch County, Heber City, Midway City, the Chamber of Commerce, or the Open Land Board itself?</p>
+    <div class="form-row"><div class="k">He listed</div><div class="v">One entity — "Heber Valley Chamber of Commerce, Director"</div></div>
+    <div class="form-row"><div class="k">Left blank</div><div class="v">The question on outside business dealings, personal conflicts, and the form's optional fuller-disclosure section</div></div>
+    <div class="form-row"><div class="k">Employer field</div><div class="v">His form asks about officer/director/employee/owner roles together, not a standalone employer line — no separate gap to point to here.</div></div>
+    <p style="margin-top:18px;font-size:14px;"><strong>What independent public records show, none of it from his own form:</strong></p>
+    <ul class="indep-list">
+      <li>Director, CAMS (the same Heber City nonprofit at the center of Cases 1 and 2), since 2019</li>
+      <li>Director and Trustee, Heber Valley Music, since 2019</li>
+      <li>Director and original incorporator, Wasatch County Arts Council, since 2016</li>
+      <li>Director, Red White and Blue Festival Inc. — alongside Rachel Kahler and Heber City Manager Matt Brower</li>
+    </ul>
+    <div class="gap-callout"><strong>The gap:</strong> at least five confirmed nonprofit director roles, one listed. The other four are all findable the same way — a state entity search — without needing his form at all.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How he connects</div>
+      <pre class="mermaid">
+flowchart LR
+  DK[Dallin Koecher]
+  DK -->|listed on his form| CoC[Heber Valley<br/>Chamber of Commerce]
+  DK -->|director, unlisted| CAMS[CAMS]
+  DK -->|director/trustee,<br/>unlisted| HVM[Heber Valley Music]
+  DK -->|director/incorporator,<br/>unlisted| WCAC[Wasatch County<br/>Arts Council]
+  DK -->|director, unlisted| RWB[Red White and Blue<br/>Festival Inc.]
+  RWB -->|also director| RK[Rachel Kahler]
+  RWB -->|also director| MB[Matt Brower<br/>Heber City Manager]
+      </pre>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>The Wasatch Open Lands Board makes decisions about land use and conservation. A member's other board seats — especially with nonprofits that hold city contracts or sit inside the same small circle of Heber Main Street organizations — are exactly what the form exists to surface.</p>
+      <h4>What conflict it could represent</h4>
+      <p>None of these five roles are shown to directly touch a specific Open Lands Board vote. The pattern itself is the concern: a public disclosure form, asked in plain language, answered with a fifth of what's actually on the record.</p>
+      <span class="verdict-tag moderate">Moderate harm — a pattern of incompleteness across a small, overlapping nonprofit network</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider"><span class="tag">Case 5</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Jon Beesley</h3>
+    <div class="role">Former Plain City mayor · ran for Weber County Commission Seat B, 2026 (lost to incumbent Sharon Bolos)</div>
+    <p>Two different disclosure forms, two different offices, both incomplete in ways that overlap.</p>
+    <div class="form-row"><div class="k">2021 form</div><div class="v">Employer field left completely blank while serving as Plain City mayor — this filing is governed by §10-3-1313 (Municipal Officers' and Employees' Ethics Act), a different statute than his later county candidate filing below</div></div>
+    <div class="form-row"><div class="k">2025 form</div><div class="v">Four omissions: Lync Construction income, his mayoral salary, a Bona Vista Water board seat, and a blank spousal disclosure page</div></div>
+    <div class="form-row"><div class="k">Spouse omitted</div><div class="v">His wife, Shelly Beesley, is a Territory Sales Rep at Sherwin-Williams — not itself a business tied to any county matter, but the spousal section was left blank entirely rather than answered</div></div>
+    <p style="margin-top:18px;font-size:14px;"><strong>What independent records show:</strong></p>
+    <ul class="indep-list">
+      <li>Employed by Lync Construction LLC (developer Pat Burns) during his mayoral tenure — a private text message described his role as "superintendent" on a specific municipal infrastructure project, a more direct description than "consulted on projects," the language his Plain City filing used</li>
+      <li>Presided, as mayor, over an October 2025 Plain City Council discussion of the Sage Creek Subdivision — Burns's own project — with no recusal or disclosure recorded in the minutes</li>
+      <li>Signed a lobbying contract with Kerry Gibson's firm (NRAE Solutions) while serving as Plain City mayor — the same firm whose other Weber County clients include Ogden City and Plain City itself</li>
+    </ul>
+    <div class="gap-callout"><strong>The gap:</strong> a blank employer field while presiding over votes tied to that same undisclosed employer's projects — the closest structural parallel to Froerer's pattern among these cases.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How he connects</div>
+      <pre class="mermaid">
+flowchart LR
+  JB[Jon Beesley]
+  JB -->|employed as<br/>superintendent| LC[Lync Construction LLC<br/>Pat Burns]
+  LC -->|developer of| SC[Sage Creek Subdivision]
+  JB -->|presided, no recusal| SC
+  JB -->|lobbying contract| NRAE["NRAE Solutions<br/>Kerry Gibson's firm"]
+  NRAE -->|also represents| PC[Plain City / Ogden City]
+      </pre>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>An employer field isn't optional detail — it's the single most basic disclosure item on any conflict-of-interest form, and it's the one most directly tied to a mayor presiding over votes on that employer's own projects.</p>
+      <h4>What conflict it could represent</h4>
+      <p>Presiding over a council discussion of a project built by your own undisclosed employer, without recusing, is a direct structural conflict — not a background interest, a live one, at the exact meeting where it mattered.</p>
+      <span class="verdict-tag severe">Severe — an undisclosed employer's project came before him directly, with no recusal on record</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider"><span class="tag">Case 6</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Katrina Gibson</h3>
+    <div class="role">Ran for Weber County Commission Seat A, 2026 (out in primary) · CFO/Treasurer, Utah Forward PAC</div>
+    <p>She filed her candidacy and her disclosure form on the same day her own property transferred into a development that would go on to receive county-approved public bonds.</p>
+    <div class="form-row"><div class="k">She listed</div><div class="v">One thing — ownership of the Korner Fix restaurant</div></div>
+    <div class="form-row"><div class="k">She marked N/A</div><div class="v">Real property interests, spouse's employer, PAC involvement, other business entities, income over the reporting threshold</div></div>
+    <div class="form-row"><div class="k">Employer field</div><div class="v">Listed her husband Kerry Gibson's employer as "N/A" — he is an active registered lobbyist</div></div>
+    <p style="margin-top:18px;font-size:14px;"><strong>What independent public records show, none of it from her own form:</strong></p>
+    <ul class="indep-list">
+      <li>She was an ACTIVE registered lobbyist herself on the day she signed the form (Jan. 8, 2026) — she canceled that license six days later, on January 14. Same quiet-correction shape as Ebert's and Bolos's cases below, except self-initiated rather than clerk-cured — see the enforcement-contrast section further down the page</li>
+      <li>CFO/Treasurer of Utah Forward PAC, LLC, per its own filings on disclosures.utah.gov</li>
+      <li>Owns or co-owns roughly five entities beyond the restaurant she listed <span class="unk">*</span>: Politix LLC (with Kerry), Utah Forward PAC LLC, KG Family Investments LLC, and KCG Outdoors LLC</li>
+      <li>Her husband, Kerry Gibson, owns or co-owns roughly nine entities of his own <span class="unk">*</span> — including a lobbying firm, a construction company, a bar, an import company, and the family farm's own successor LLC</li>
+    </ul>
+    <div class="unk-note"><span class="unk">*</span> <strong>What we don't know:</strong> "roughly five" and "roughly nine" describe the entities identified so far by name — not a fresh, complete registry search run today. The actual count could be higher or lower.</div>
+    <div class="def-inline"><strong>Politix LLC — money moving in a circle:</strong> Politix, formed March 27, 2024 and co-owned by Katrina and Kerry Gibson at the same Ogden address, received a $1,158.30 payment from Utah Forward PAC on July 18, 2025 — confirmed on the PAC's own filing. That's PAC money she controls, as CFO/Treasurer, paid to a company she and her husband jointly own.</div>
+    <div class="def-inline"><strong>The land transfer:</strong> the same day she filed her candidacy — January 8, 2026 — a deed (Weber County Recorder Entry #3400311) transferred a parcel from her own personal trust to an entity tied to a developer holding dozens of other Weber County parcels, for $10 nominal consideration. That parcel is now inside the Promontory Commerce Center PID — a $25.9 million infrastructure bond the County Commission approved that March, all three commissioners voting yes.</div>
+    <div class="def-inline"><strong>Two more names pulled in:</strong> Utah Forward PAC also gave $3,000 to Ryan Wilcox (Jan. 19, 2026) and $500 to Joseph Kerry, a sitting USBE member (March 2026, see Case 8) — two more officeholders receiving direct money from the fund Katrina runs. Separately, House candidate Jake Sawyer's own 2024 campaign paid $5,244.20 to Politix and $68.18 to Xalisco (Kerry Gibson's bar) while Sawyer publicly endorsed Katrina for Commission — a different pattern (a candidate paying Gibson-family businesses while endorsing Katrina) than the PAC self-dealing above, but part of the same network.</div>
+    <div class="gap-callout"><strong>Worth noting:</strong> she publicly filed a lawsuit alleging a rival candidate's own disclosure was untimely — a case a judge dismissed. Her own form, filed the same election cycle, listed a single restaurant and nothing else — not the PAC, not the lobbyist license, not any of roughly fourteen business entities across her and her husband combined.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How she connects</div>
+      <pre class="mermaid">
+flowchart LR
+  KG[Katrina Gibson]
+  KG -->|CFO/Treasurer| UFP[Utah Forward PAC]
+  UFP -->|gave $2,500| SB[Sharon Bolos]
+  UFP -->|gave $3,000,<br/>1/19/2026| RW[Ryan Wilcox]
+  KGH -.->|possible nephew,<br/>unverified tip| RW
+  UFP -->|gave $500| JK[Joseph Kerry<br/>USBE District 2]
+  JS[Jake Sawyer<br/>House candidate] -->|his campaign paid<br/>$5,244.20| PX
+  JS -->|his campaign paid<br/>$68.18| XL["Xalisco LLC<br/>Kerry Gibson's bar"]
+  JS -->|publicly endorsed| KG
+  UFP -->|paid $1,158.30,<br/>7/18/2025| PX[Politix LLC]
+  KG -->|co-owns| PX
+  KGH[Kerry Gibson<br/>her husband] -->|co-owns| PX
+  KG -->|sued over disclosure<br/>timing, dismissed| JE[James Ebert]
+  KG -->|active lobbyist,<br/>canceled 6 days later| LOB[her own lobbyist<br/>registration]
+  KG -->|same-day deed,<br/>$10 consideration| BP[Bennet LLC /<br/>BlackPine LLC]
+  BP -->|now the site of| PID[Promontory Commerce<br/>Center PID, $25.9M bond]
+  KGH -->|registered lobbyist| LS[Legislative Solutions]
+  LS -->|clients| OC[Ogden City / Morgan County /<br/>Wolf Creek Management]
+      </pre>
+      <p style="font-size:12px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;margin:10px 2px 0;"><span class="unk">*</span> Dotted line marks a claim not yet independently sourced — the Wilcox family relationship is a tip, not a confirmed record.</p>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>Every item omitted here — an active lobbyist license, a PAC leadership role, a same-day land transfer into a development pipeline — is exactly what a candidate disclosure form exists to surface before voters decide.</p>
+      <h4>What conflict it could represent</h4>
+      <p>This isn't a background interest. She personally transferred land into a development entity on the day she filed for county office, and that land later benefited from a public bond her own future colleagues on the Commission approved. That's about as direct as this pattern gets.</p>
+      <span class="verdict-tag severe">Severe — a same-day land transfer into a project that later received a county-approved public bond</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider"><span class="tag">Case 7</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Sharon Arrington Bolos</h3>
+    <div class="role">Weber County Commissioner, Seat B, since 2023 · reelected 2026</div>
+    <p>Already published, with specific dated votes on the record — and a response, when confronted, that confirmed the relationship without addressing the votes themselves.</p>
+    <div class="form-row"><div class="k">Her employer</div><div class="v">Disclosed — self-employed accountant, consistent with her official biography. This case is not about a blank employer field.</div></div>
+    <div class="form-row"><div class="k">Not disclosed</div><div class="v">That Bryan Arrington, Vice President of Construction at Nilson Homes, is her brother</div></div>
+    <div class="form-row"><div class="k">Separately</div><div class="v">Her 2026 candidacy COI form was not present in her public filing when she originally filed, per independent watchdog research.</div></div>
+    <div class="def-inline"><strong>Resolved:</strong> a March 30, 2026 text exchange shows Stacy Cornell asking Weber County Clerk Ricky Hatch whether Bolos's disclosure — sitting in the "financial disclosures" bucket instead of her "declaration paperwork" — could be moved. Hatch approved it personally, saying he preferred every candidate's disclosure to look the same. This was Hatch curing a misfiled document after the fact, quietly, with no public notice — the same pattern he used for James Ebert's late COI, and a different outcome than Courtney Ryan got that same cycle for arriving 30 seconds late to file (see the enforcement-contrast panel below).</div>
+    <p style="margin-top:18px;font-size:14px;"><strong>The votes, dated and specific:</strong></p>
+    <ul class="indep-list">
+      <li>Feb. 6, 2024 — seconded preliminary subdivision approval for Orchards at JDC Ranch Phases 2 and 3, a 115-unit Nilson Homes development. No conflict disclosed in the minutes.</li>
+      <li>Same meeting — seconded a Land Drain Crossing Warranty Agreement between Weber County and Nilson Homes. No conflict disclosed.</li>
+      <li>July 31, 2024 — publicly championed a 275-unit expansion of the same development (bringing it to 1,000 units): "Attainability is what this is all about, and I think this is a great step forward." The amendment passed.</li>
+    </ul>
+    <div class="gap-callout"><strong>When asked directly:</strong> Bolos confirmed Arrington had worked at Nilson, said he no longer does, and said they "never interacted professionally" — without ever addressing his actual title during the period she cast the votes above. Corporate records separately show Arrington as manager of Nilson Land Holdings, LLC, with a related entity (Nordic Management LLC) managing dozens of Nilson-affiliated companies that came before bodies she chaired.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How she connects</div>
+      <pre class="mermaid">
+flowchart LR
+  SB[Sharon Bolos]
+  SB -->|seconded, Feb 2024,<br/>undisclosed| NH1[Orchards at JDC Ranch<br/>115 units]
+  SB -->|seconded, same day,<br/>undisclosed| NH2[Land Drain Crossing<br/>Agreement]
+  SB -->|championed, Jul 2024| NH3[1,000-unit<br/>expansion]
+  NH1 --> NH[Nilson Homes]
+  NH2 --> NH
+  NH3 --> NH
+  NH -->|manager, Nilson<br/>Land Holdings LLC| BA[Bryan Arrington<br/>her brother]
+  SB -->|signed trustee<br/>appointment| PID[Nordic Village PID]
+  UFP[Utah Forward PAC] -->|gave $2,500| SB
+      </pre>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>A sibling's role at a company with matters before the Commission is a textbook family-interest disclosure — the kind every county COI form asks about directly. This isn't a case where the form lacked the right question.</p>
+      <h4>What conflict it could represent</h4>
+      <p>Three specific, dated votes and public statements favoring her own brother's employer's projects, with no disclosure in the record for any of them. When asked, the response confirmed the relationship rather than denying it — and still didn't address the votes.</p>
+      <span class="verdict-tag severe">Severe — three specific, dated votes favoring a family member's employer, undisclosed each time</span>
+    </div>
+  </div>
+</section>
+
+<div class="case-divider"><span class="tag">Case 8</span><span class="rule"></span></div>
+<section class="section" style="padding-top:22px;">
+  <div class="case-card">
+    <h3>Joseph Kerry</h3>
+    <div class="role">Utah State Board of Education, District 2 (Ogden) · chairs the Law and Licensing Committee</div>
+    <p>The committee he chairs oversees educator licensing and discipline. His own disclosure form omits the nonprofit he chairs — the same one that formally submitted licensing-policy advocacy into that committee's own record.</p>
+    <div class="form-row"><div class="k">He listed</div><div class="v">Littlecloud Media and Bible Rescue — two entities, named correctly</div></div>
+    <div class="form-row"><div class="k">Omitted</div><div class="v">Joe for Utah, LLC (his own advocacy LLC); his chair role at Path Forward Utah; his registered-agent role at a company owned by his largest documented donor</div></div>
+    <div class="form-row"><div class="k">Spouse line</div><div class="v">Marked "N/A" — then, two lines later, names the spouse's employer as Ballet West. The form contradicts itself.</div></div>
+    <p style="margin-top:18px;font-size:14px;"><strong>What independent public records show, none of it from his own form:</strong></p>
+    <ul class="indep-list">
+      <li>Chair of Path Forward Utah since 2024, continuously through his entire USBE term. On Dec. 9, 2025, Path Forward Utah's president formally submitted two detailed policy letters into the official record of a Law and Licensing Committee meeting — the exact committee Kerry chairs, with Kerry presiding. The record doesn't show him disclosing the relationship or recusing from the discussion.</li>
+      <li>Registered agent for Colonial Specialty Co., a for-profit company owned by Paul Swenson — Kerry's largest documented campaign donor, $3,000 total (later deleted from his own campaign finance filings).</li>
+      <li>Owner/manager of Joe for Utah, LLC, an entity whose own founding document states its purpose as advocating for education policy — directly overlapping his USBE role — and not listed anywhere on his disclosure form.</li>
+      <li>Received $500 from Utah Forward PAC in March 2026, the same PAC tied to Case 6.</li>
+    </ul>
+    <div class="def-inline"><strong>Professional context, for fairness:</strong> a 2021 New Jersey bar disciplinary letter admonished Kerry — the lowest level of formal discipline — for practicing law in Utah without a Utah license, through a firm he'd already closed by the time of the finding. No clients were harmed and no further violations were charged. It's included here only because it involves the same subject matter — licensing — that his current committee oversees, not as an equivalent-weight finding to the items above.</div>
+    <div class="connect-panel">
+      <div class="connect-label">How he connects</div>
+      <pre class="mermaid">
+flowchart TD
+  JK[Joseph Kerry]
+  JK -->|chairs| LLC[Law and Licensing<br/>Committee, USBE]
+  JK -->|chairs, unlisted<br/>on his form| PFU[Path Forward Utah]
+  PFU -->|submitted policy<br/>letters, Dec 2025| LLC
+  JK -->|owner/manager,<br/>unlisted| JFU[Joe for Utah LLC]
+  JK -->|registered agent,<br/>unlisted| CSC[Colonial Specialty Co.]
+  CSC -->|owned by| PS[Paul Swenson<br/>his largest donor]
+  UFP[Utah Forward PAC] -->|gave $500| JK
+      </pre>
+    </div>
+    <div class="rationale-box">
+      <h4>Why it belongs on the form</h4>
+      <p>A board member's own disclosure form exists precisely to let the public see when an outside role might shape their official actions. A nonprofit chair role becomes especially relevant when that nonprofit is formally lobbying the exact committee the chair presides over.</p>
+      <h4>What conflict it could represent</h4>
+      <p>The Path Forward Utah connection is the sharpest: his own organization submitted advocacy directly into his own committee's record, with him chairing the meeting, and no disclosure or recusal visible anywhere in that record.</p>
+      <span class="verdict-tag severe">Severe — his own nonprofit lobbied the exact committee he chairs, with no disclosure on record</span>
+    </div>
+  </div>
+</section>
+
+<div class="movement" id="conclusion">
+  <span class="num">§</span><span class="rule"></span><span class="label">Conclusion</span>
+</div>
+<section class="section" style="padding-top:22px;">
+  <h2>Eight forms, eight different ways of leaving something out</h2>
+  <p class="lead">No two of these look exactly alike — and that's the point worth sitting with.</p>
+  <p>Rowland and Kahler checked the blanket "no conflict" box. Froerer's forms told the truth right up until an entity was about to dissolve, then went quiet on it. Koecher answered one question out of five confirmed roles. Beesley left an employer field blank entirely while presiding over a vote tied to that same employer. Katrina Gibson listed one restaurant while an active lobbyist license and a same-day land transfer went unmentioned. Bolos's own form didn't arrive with her filing on time. Kerry named two entities correctly while a nonprofit he chairs quietly lobbied the exact committee he presides over. Eight people, eight different shapes of the same gap — which tells you there's no single trick being run here. It's a form nobody's checking, and each person found their own comfortable way to leave things out.</p>
+
+  <div class="void-panel">
+    <div class="void-label">Does anyone actually check these forms?</div>
+    <div class="void-quote" style="font-size:17px;">Functionally, no — but the one time this cycle the system actually enforced something, it wasn't for any of this. In this county's own filing season, the clerk's office forgot to give one candidate his form at all and didn't notice for months. Nobody cross-references a filed form against the state's own corporate registry — the same registry any resident can search for free in under a minute. A form gets collected, filed, and left alone unless someone outside government goes looking.</div>
+  </div>
+
+  <p>That contrast is worth stating plainly. A separate 2026 Weber County candidate, Courtney Ryan, was disqualified for arriving 30 seconds late to file — an objection filed by a sitting commissioner with what's been described as unusually specific knowledge of what happened inside the elections office that day, sustained within 48 hours, no cure offered. Meanwhile Ebert's late COI was quietly corrected after a complaint, Bolos's disclosure was quietly moved from the wrong filing bucket to the right one after a text exchange with the clerk, and Katrina Gibson (Case 6) quietly canceled her own active lobbyist license six days after filing — a self-initiated fix rather than a clerk-cured one, but the same shape: correct the conflict quietly, no public notice, rather than disclose it and let voters weigh it. Four candidates, one hard disqualification and three quiet fixes, same election cycle, same clerk's office. None of the disclosure gaps documented across Cases 1-8 triggered so much as a request to amend. The system enforced a 30-second deadline to the letter and let substantive omissions pass without comment. That's not proof of favoritism on its own — but it is proof that "the rules get enforced" and "the rules that get enforced are the ones that matter" are two different claims, and only the first one is true here.</p>
+
+  <p>That's why this matters to a vote, specifically. These forms exist to let the public evaluate independence <em>before</em> handing someone a seat that votes on zoning, tax-increment bonds, and contracts worth tens of millions of dollars. Once someone's in office, the conflicts don't disappear — they just start voting. The disclosure form is the one moment that's supposed to let a voter see the whole picture before that starts. When it's incomplete and nobody checks it, that moment quietly disappears, and the only thing standing between the public and an undisclosed conflict is whether someone happened to go look — which is exactly what the tools in the next section let anyone do themselves.</p>
+</section>
+
+<section class="section" style="padding-top:52px;">
+  <h2>How to check this yourself</h2>
+  <p class="lead">This isn't a special skill. Every tool used to find these gaps is free and public.</p>
+  <p><strong>1. Find the disclosure form.</strong> Most counties post current-year filings on their elections or clerk's website. State legislators' forms are archived at le.utah.gov. MIDA and similar authorities are required by statute to post board members' filings on their own website.</p>
+  <p><strong>2. Search the person's name at the Utah Division of Corporations</strong> (secure.utah.gov/bes/). It's free, takes seconds, and shows every business entity where someone is listed as an officer, manager, or member — regardless of whether they mentioned it on their own form.</p>
+  <p><strong>3. Check the organization's own website.</strong> Nonprofits routinely list their boards publicly — "meet the team" pages, annual reports, press releases announcing new members. None of it depends on the official's cooperation.</p>
+  <p><strong>4. Compare, don't accuse.</strong> The finding is the gap between the form and the independent record — not a conclusion about why the gap exists. State what the form asked, what was written, and what the public record shows elsewhere. Let the reader see it.</p>
+
+  <details class="full-sources">
+    <summary>Sources for this piece</summary>
+    <div class="full-sources-body">
+      <h4>How disclosure works</h4>
+      <p>Utah Code Title 20A, Chapter 11, Part 16 — §20A-11-1602.5 (public website), §20A-11-1603 (filing at candidacy, including the (1)(c) incumbent exception), §20A-11-1604 (disclosure content, 7-day amendment deadline, penalties, at-risk redaction under (7)(a)), current effective text, le.utah.gov.<br>
+      Utah Code §17-70-509 (county elected officers, filed to the county clerk).<br>
+      Utah Code §10-3-1313 (Municipal Officers' and Employees' Ethics Act, municipal elected officers, filed to the city recorder).<br>
+      Utah Code Title 67, Chapter 16 (Public Officers' and Employees' Ethics Act), §67-16-16 (special public officer annual disclosure, Jan. 1-31, filed to the board's own clerk).<br>
+      Utah Code §63H-1-304 (MIDA-specific posting requirements).<br>
+      Utah Code Title 36, Chapter 11 (lobbyist registration).<br>
+      Municipal Conflict of Interest Disclosure Statement template, Utah Code §10-3-1313, §20A-11-1604(6), §10-3-301.5, utah.gov/pmn.<br>
+      Office of the Utah State Auditor, Conflict of Interest Disclosure Form template, auditor.utah.gov.<br>
+      Lehi Free Press / American Fork Citizen, "Conflicts of interest: Former state auditor says, 'disclose more, not less, and do it publicly,'" June 4, 2026.<br>
+      Jon Beesley's investigative memorandum EIR-2026-0414, dated May 8, 2026, on Weber County Clerk/Auditor filing practices for the 2026 candidate cycle.<br>
+      Second Judicial District Court record — Courtney Ryan candidate disqualification, 2026 cycle.</p>
+
+      <h4>Erik Rowland</h4>
+      <p>Erik Rowland's Wasatch County Conflict of Interest Disclosure Form, submitted for his MIDA board seat, dated Jan. 2, 2026.<br>
+      MIDA's own statutory disclosure form (comparison filing, Gary Harter, Jan. 26, 2026).<br>
+      CAMS ("Community Alliance for Main Street, Inc."), board roster, cams website and Utah Division of Corporations Entity #11326836-0140.<br>
+      Utah Division of Corporations: SignalRx LLC (formerly JASE Pharmacies, LLC) Entity #13807869-0160; Rowland Development LLC Entity #12862592-0160; Triumph Assurance Group LLC Entity #14072630-0160; TimeMD, inc.<br>
+      State auditor complaint record naming Matt Brower (not Rowland) as its subject, re: CAMS board disclosure.</p>
+
+      <h4>Rachel Kahler</h4>
+      <p>Rachel Kahler's 2026 Wasatch County Declaration of Candidacy packet, including bundled Conflict of Interest Disclosure Form.<br>
+      Heber City Professional Services Agreement with CAMS, approved Jan. 20, 2026, ratified April 21, 2026 (3-2 vote).<br>
+      Utah Division of Corporations: Red White and Blue Festival Inc. Entity #13300584-0140; 5 In The Hive, LLC Entity #13700891-0160, Certificate of Organization.<br>
+      disclosures.utah.gov, wasatchcounty.gov/275/Election-Voter-Information — Kahler's filed campaign financial disclosures (3/31/2026, June 2026).</p>
+
+      <h4>Gage Froerer</h4>
+      <p>Weber County COI disclosures, filed Jan. 24, 2025 and Jan. 13, 2026 (Weber Elections).<br>
+      Utah House COI disclosures, le.utah.gov/house2/CofI/, 2014, 2016, and undated ~2018 filings.<br>
+      Utah Division of Corporations: Nordic Valley Land Associates LLC (dissolution timing); Highlander NP Housing Corporation Entity #7661126-0140 (dissolved Feb. 2025); G &amp; E 2 Properties, LLC Entity #8785138-0160, Statement of Authority; Froerer Appraisal and Investment Company; C.K.R. Construction, L.L.C.<br>
+      Utah Public Radio, June 13, 2023; KSL.com, Dec. 27, 2022; Standard-Examiner, Dec. 19, 2022 (Nordic Valley disclosure history).<br>
+      Ogden Valley Planning Commission minutes, June 24, 2025 and Sept. 23, 2025 (Laura Warburton appointment and Eden Crossing vote).<br>
+      Weber County Commission minutes, Dec. 2, 2025 (Eden Crossing approval and Froerer Family Investment's own ZDA2025-12 application, same day).<br>
+      Weber County Commission resolution, April 2025 (Nordic Village PID trustee appointment, signed by Chair Sharon Bolos).<br>
+      Utah Forward PAC, LLC campaign finance filings, disclosures.utah.gov (contributions to Froerer and Bolos).<br>
+      Previously published Weber County Hive enforcement-gap comparison ("Three cases, three oversight channels, similar endings") — county attorney/state auditor review outcome for Froerer's Nordic Valley disclosure, dated to 2022 following James O'Brien's original complaint.<br>
+      Utah Lobbyist Registry — Kerry Gibson's client list, including Wolf Creek Management.<br>
+      Utah Division of Corporations, Wolf Creek Management, LLC, Entity #9164082-0160 — John Lewis confirmed as registered agent and sole Member; original 2014 Certificate of Organization states the company's purpose as general management and payroll services.<br>
+      EVO Utah, "About EVO" page — John Lewis's own bio (32 years contracting/real estate, 8 years OVPC chair).<br>
+      Wolf Creek Resort, "About Us" page — John Lewis's own bio (Lewis Homes Inc., general contractor).</p>
+
+      <h4>Dallin Koecher</h4>
+      <p>Wasatch Open Lands Board, Annual Conflict of Interest Disclosure Form, signed 2/4/2026.<br>
+      OpenCorporates: director, CAMS (since 2019); director/trustee, Heber Valley Music (since 2019); director/incorporator, Wasatch County Arts Council (since 2016); director, Red White and Blue Festival Inc.</p>
+
+      <h4>Jon Beesley</h4>
+      <p>Plain City conflict-of-interest disclosure (2021, employer field) and Weber County candidate disclosure (2025).<br>
+      Sept. 9, 2021 Plain City Planning Commission minutes (Lync Construction as active applicant).<br>
+      October 2025 Plain City Council minutes (Sage Creek Subdivision item, no recusal recorded).<br>
+      Weber County/Lync Development letter agreement, 3600 North road improvements.</p>
+
+      <h4>Katrina Gibson</h4>
+      <p>Weber County Clerk's copy of her Conflict of Interest Disclosure Form, filed Jan. 8, 2026.<br>
+      Utah Lobbyist Registry — her own registration (Legislative Solutions, began 1/10/2023, canceled 1/14/2026) and Kerry Gibson's full 19-client filing with exact begin/end dates for each (including 8 clients that all ended the same day, Jan. 3, 2025).<br>
+      Utah Division of Corporations / corporations.utah.gov and OpenCorporates — officer records for Politix LLC, KG Family Investments LLC, KCG Outdoors LLC (Katrina); Gibson's Corner LLC, Snow Basin Spirits LLC, Base Mountain Construction LLC, Xalisco LLC, Mexico US Imports LLC, DON LOPEZ LLC, Gibson Farms Legacy LLC (Kerry).<br>
+      disclosures.utah.gov, Folder 1415975 — Utah Forward PAC, LLC, Katrina Gibson listed as CFO/Treasurer, including its $1,158.30 payment to Politix LLC dated 7/18/2025, its $3,000 payment to Ryan Wilcox dated 1/19/2026, and its $500 payment to Joseph Kerry dated 3/16/2026.<br>
+      Joseph Kerry's own 2026 campaign finance report (independently confirming the Utah Forward PAC $500 contribution) and his 2026 USBE conflict-of-interest disclosure.<br>
+      Jake Sawyer campaign finance filings, disclosures.utah.gov — payments to Politix LLC (8/2/2024, 8/6/2024) and Xalisco LLC (6/14/2024).<br>
+      Utah Division of Corporations, Politix LLC, Entity 13903683-0160, formed 3/27/2024.<br>
+      Weber County Recorder, Entry #3400311 — Special Warranty Deed, Jan. 8, 2026.<br>
+      Weber County Commission Resolution 10-2026, March 3, 2026 — Promontory Commerce Center PID, $25.9M bond approval.<br>
+      KSL.com — Wolf Creek Resort Holdings' May 2025 lawsuit against the Wolf Creek Water and Sewer Improvement District.<br>
+      Second Judicial District Court record — the Ebert disqualification petition and its dismissal.<br>
+      Text exchange (via Jon Beesley's investigative memorandum, cited in Case 5), Stacy Cornell and Ricky Hatch, March 30, 2026, re: Bolos's disclosure filing location.<br>
+      Ryan Wilcox/Kerry Gibson family-relationship tip — unverified as of this writing; treated as a research lead, not a confirmed fact.</p>
+
+      <h4>Sharon Arrington Bolos</h4>
+      <p>Weber County Commission minutes, Feb. 6, 2024 (Items G3 and G7) and July 31, 2024 (JDC Ranch expansion).<br>
+      Weber County Commission resolution, April 2025 (Nordic Village PID trustee appointment, signed by Chair Bolos).<br>
+      Utah Forward PAC campaign finance filings, disclosures.utah.gov (2/17/2026 contribution).<br>
+      webercommissionerwatch.com, Wayback Machine-preserved screenshots (2026 COI filing status).<br>
+      Corporate registry: Bryan Arrington, manager, Nilson Land Holdings, LLC; Nordic Management LLC.<br>
+      Previously published Weber County Hive reporting: "Nine Years of Silence" and the follow-up corporate-layering piece.</p>
+
+      <h4>Joseph Kerry</h4>
+      <p>Kerry's 2026 USBE conflict-of-interest disclosure form.<br>
+      Utah Division of Corporations: Joe for Utah, LLC, Entity #12739877-0160; Colonial Specialty Co., Inc. (Paul Swenson, owner); Path Forward Utah, Entity #12647238-0140, director listing.<br>
+      Path Forward Utah's IRS Form 990-EZ filings, 2023-2025 (officer compensation and role listings).<br>
+      Official Law and Licensing Committee Summary of Actions, Dec. 9, 2025 (Path Forward Utah's submitted letters, Documents 1 and 2).<br>
+      Kerry's 2026 campaign finance report (Utah Forward PAC and Paul Swenson contributions, including deleted entries).<br>
+      New Jersey Disciplinary Review Board, Letter of Admonition, Docket No. DRB 21-159, dated 10/25/2021.<br>
+      Previously published Weber County Hive reporting comparing Kerry and opponent Kacee Weaver.</p>
+    </div>
+  </details>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <h3>The Weber County Hive · Politics for Beginners</h3>
+    <p>Plain-language explainers on how Utah government actually works, and the public tools anyone can use to check it.</p>
+    <a href="index.html">← All topics</a>
+  </div>
+</footer>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      background: '#ffffff',
+      primaryColor: '#F3ECE0',
+      primaryTextColor: '#211714',
+      primaryBorderColor: '#6E1F2B',
+      lineColor: '#8C3B44',
+      secondaryColor: '#E9E0D0',
+      fontFamily: 'IBM Plex Mono, monospace',
+      fontSize: '18px'
+    },
+    flowchart: { curve: 'basis', htmlLabels: true, useMaxWidth: false, nodeSpacing: 45, rankSpacing: 60, padding: 12 }
+  });
+</script>
+</body>
+</html>
